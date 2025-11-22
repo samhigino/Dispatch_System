@@ -28,12 +28,18 @@ Point2D& Demand::GetDestination() {
     return this->destination;
 }
 
-double Demand::GetOriginDistance(Demand& other) {
+// Calcula a distância entre as origens desta e de outra demanda
+double Demand::OriginDistance(Demand& other) {
     return this->origin.Distance(other.GetOrigin());
 }
 
-double Demand::GetDestinationDistance(Demand& other) {
+// Calcula a distância entre os destinos desta e de outra demanda
+double Demand::DestinationDistance(Demand& other) {
     return this->destination.Distance(other.GetDestination());
+}
+
+double Demand::GetDistance() {
+    return this->origin.Distance(this->destination);
 }
 
 int Demand::GetMemoryUsage() {

@@ -26,6 +26,17 @@ int DemandGroup::Insert(Demand& item) {
     }
 }
 
+// Remove: remove o item mais recente do grupo e retorna o índice onde foi removido
+int DemandGroup::Remove() {
+    if(this->item_counter == 0) {
+        return -1; // Grupo vazio
+    }
+    else {
+        this->item_counter--;
+        return this->item_counter;
+    }
+}
+
 // Get: retorna um ponteiro para a Demanda alocada no índice passado
 Demand* DemandGroup::Get(int index) {
     // Lança uma exceção caso a posição seja inacessível

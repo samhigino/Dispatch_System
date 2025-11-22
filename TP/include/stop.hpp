@@ -23,6 +23,8 @@ class Stop {
 
         // Operações/Métodos
         Point2D& GetPoint();                // Retorna referência para o ponto da parada
+        StopType GetType();                 // Retorna o tipo desta parada
+        double Distance(Stop& other);       // Retorna a distância entre esta parada e outra
 
         // Controle de memória
         int GetMemoryUsage();               // Retorna a quantidade de memória usada pelo objeto

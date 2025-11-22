@@ -13,7 +13,7 @@ Point2D::Point2D(const Point2D& other) {
     this->y = other.y;
 }
 
-// Sobrecarga de atribuição
+// Sobrecarga de atribuição - copia para este objeto as coordenadas do outro
 void Point2D::operator=(const Point2D& other) {
     this->x = other.x;
     this->y = other.y;
@@ -29,7 +29,7 @@ double Point2D::GetY() {
     return this->y;
 }
 
-// Distance: calcula a distância entre esse e outro ponto passado por referência
+// Distance: calcula a distância (double) entre esse e outro ponto passado por referência
 double Point2D::Distance(Point2D& other) {
     double dx = this->x - other.GetX();
     double dy = this->y - other.GetY();

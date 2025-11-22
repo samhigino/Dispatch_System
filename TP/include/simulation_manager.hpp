@@ -4,6 +4,7 @@
 #include "ride.hpp"
 #include "demand_group.hpp"
 
+
 const static int MAX_GROUPS = 100;
 
 class Manager {
@@ -17,15 +18,20 @@ class Manager {
         float min_efficiency;           // lambda - Eficiência mínima da corrida compartilhada
 
         // Objetos de simulação e variáveis de controle
-        int global_time;                            // Tempo global da simulação
+        EventScaler scaler;                         // Escalonador
+        double global_time;                            // Tempo global da simulação
         DemandGroup** demand_groups;                // Grupos de demandas (grupo contém demandas elegíveis para compartilhamento)
         int group_count;                            // Quantidade de grupos de demandas atualmente
         Ride** rides;                               // Corridas geradas com base nos grupos de demandas
+        int ride_count;                             // Quantidade de corridas já geradas atualmente
 
         // Funções auxiliares (não acessíveis externamente - ver uso em state_manager.cpp)
+        void UpdateMemory();
+        DemandGroup* CreateDemandGroup();
         void MakeRide(DemandGroup* group);
+        bool CheckEfficiency(DemandGroup* group);
 
-        // Controle de memória
+        // Controle de memória e depuração
         int static_mem_usage;           // Memória estática usada pelo objeto (imprescindível)
         int extra_mem_usage;            // Memória variável usada pelo objeto (auxiliar)
         int max_extra_mem_usage;        // Memória máxima já usada pelo objeto em algum momento da simulação
@@ -37,8 +43,8 @@ class Manager {
 
         // Simulação (pré, durante e pós)
         int MakeDemand(int id, int t, double ox, double oy, double dx, double dy);
-        void StartSimulation();
-        void GetStatistics(std::fstream& out);
+        void StartSimulation(std::ofstream& out);
+        void GetStatistics(std::ofstream& out);
 
         // Controle de memória
         int GetStaticMemUsage();

@@ -23,6 +23,17 @@ Stop::Stop(Demand& demand, StopType type) {
 Point2D& Stop::GetPoint() {
     return this->stop;
 }
+
+// GetType: Retorna o tipo desta parada
+StopType Stop::GetType() {
+    return this->type;
+}
+
+// Distance: Retorna a distância entre esta parada e outra
+double Stop::Distance(Stop& other) {
+    return this->stop.Distance(other.GetPoint());
+}
+
 // GetMemoryUsage: Retorna a quantidade de memória usada pelo objeto
 int Stop::GetMemoryUsage() {
     return this->static_mem_usage;

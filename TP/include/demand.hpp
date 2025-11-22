@@ -31,8 +31,9 @@ class Demand {
         int GetTime();                                  // Retorna o tempo de solicitação
         Point2D& GetOrigin();                           // Retorna referência para o ponto de origem
         Point2D& GetDestination();                      // Retorna referência para o ponto de destino
-        double GetOriginDistance(Demand& other);        // Calcula distância entre origens desta demanda e outra demanda
-        double GetDestinationDistance(Demand& other);   // Calcula distância entre destinos desta demanda e outra demanda
+        double OriginDistance(Demand& other);           // Calcula distância entre origens desta demanda e outra demanda
+        double DestinationDistance(Demand& other);      // Calcula distância entre destinos desta demanda e outra demanda
+        double GetDistance();                           // Calcula a distância entre a origem e o destino desta demanda
 
         // Controle de memória
         int GetMemoryUsage();           // Retorna a quantidade de memória usada pelo objeto
