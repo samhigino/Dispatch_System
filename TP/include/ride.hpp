@@ -6,6 +6,7 @@
 #include <iostream>
 #include <fstream>
 #include "segment.hpp"
+#include "demand_group.hpp"
 #include "event_scaler.hpp"
 
 const static int MAX_SEGMENTS = 40;

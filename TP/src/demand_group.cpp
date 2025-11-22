@@ -1,12 +1,16 @@
+#include <iostream>
 #include "demand_group.hpp"
 
 // CONSTRUTOR: inicializa o contador como 0 e cria o grupo com o tamanho máximo passado
 DemandGroup::DemandGroup(int max_size) : item_counter(0) {
+    std::cout << "\tNew DemandGroup is being created with a max size of " << max_size << ".\n";
     this->max_size = max_size;
     this->group = new Demand[max_size];
+    std::cout << "\tMemory allocated successfully.\n";
 
     // Controle de memória
     this->mem_usage = 4*sizeof(int) + sizeof(Demand*) + sizeof(Demand)*max_size;
+    std::cout << "\tMemory control updated successfully. Everything went great.\n\n";
 }
 
 // DESTRUTOR: apaga todas as demandas alocadas dinamicamente

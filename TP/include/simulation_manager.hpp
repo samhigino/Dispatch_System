@@ -42,7 +42,7 @@ class Manager {
         ~Manager();
 
         // Simulação (pré, durante e pós)
-        int MakeDemand(int id, int t, double ox, double oy, double dx, double dy);
+        int MakeDemand(int id, int t, double ox, double oy, double dx, double dy, std::ostream debug);
         void StartSimulation(std::ofstream& out);
         void GetStatistics(std::ofstream& out);
 

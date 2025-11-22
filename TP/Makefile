@@ -15,7 +15,7 @@ SRC_DIR = src
 # --------------------------------------------------------------
 # OBJETOS
 # --------------------------------------------------------------
-TARGET = tp1.out
+TARGET = tp2.out
 TEST_TARGET = teste.out
 MAIN_OBJ = obj/main.o obj/2D_point.o obj/demand.o obj/stop.o obj/segment.o obj/demand_group.o obj/ride.o obj/event.o obj/event_scaler.o obj/simulation_manager.o
 TEST_OBJ = obj/test.o obj/2D_point.o obj/demand.o obj/stop.o obj/segment.o obj/demand_group.o obj/ride.o obj/event.o obj/event_scaler.o obj/simulation_manager.o

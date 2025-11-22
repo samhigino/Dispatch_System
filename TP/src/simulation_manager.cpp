@@ -15,18 +15,27 @@ void Manager::UpdateMemory() {
 // CreateDemandGroup: cria um novo grupo de demandas, insere-a no vetor de grupos e retorna o ponteiro para o novo grupo
 DemandGroup* Manager::CreateDemandGroup() {
     // Criação do grupo
+    std::cout << "\tCreateDemandGroup() called.\n";
     if(group_count < MAX_GROUPS) {
+        std::cout << "\tWe can create a new group. This is fine.\n";
+        std::cout << "\tCreating new group in demand_groups[" << group_count << "] passing veh_capacity = " << veh_capacity << " to it. Now evaluating the creation of the group:\n\n" ;
         this->demand_groups[group_count] = new DemandGroup(this->veh_capacity);
         this->group_count++;
+        std::cout << "\tGroup created. group_count was also updated.\n";
     }
     else {
+        std::cout << "\tIMPOSSIBLE TO CREATE NEW DEMAND GROUP. SOMETHING GONE WRONG.\n";
         throw std::out_of_range("Max demand groups reached. Can't create a new group.");
     }
 
     // Update de memória
-    this->extra_mem_usage += demand_groups[group_count]->GetMemoryUsage();
+    std::cout << "\tNow trying to update memory. Call GetMemoryUsage() for the group created.\n";
+    this->extra_mem_usage += demand_groups[group_count-1]->GetMemoryUsage();
+    std::cout << "\tThat worked. Now calling UpdateMemory().\n";
     UpdateMemory();
+    std::cout << "\tThat also worked, thankfully.\n";
 
+    std::cout << "\tGroup created.\n";
     return demand_groups[this->group_count - 1];
 }
 
@@ -85,24 +94,33 @@ bool Manager::CheckEfficiency(DemandGroup* group) {
 // CONSTRUTOR: incializa todas os parâmetros de simulação com os parâmetros, tempo global como 0, memória estática e extra como apropriado
 Manager::Manager(int eta, double gamma, double delta, double alpha, double beta, float lambda) {
     // Parametrização da simulação
+    std::cout << "Called trying to instantiate manager.\n";
+    std::cout << "Setting basic simulation parameters...\n";
     this->veh_capacity = eta;
     this->veh_speed = gamma;
     this->delta = delta;
     this->origin_max_distance = alpha;
     this->destin_max_distance = beta;
     this->min_efficiency = lambda;
+    std::cout << "Simulation parameters set.\n\n";
 
     // Objetos de simulação e variáveis de controle
+    std::cout << "Instantiating simulation objects...\n";
     this->global_time = 0;
     this->demand_groups = new DemandGroup*[MAX_GROUPS];
     this->group_count = 0;
+    std::cout << "  Created vector with the DemandGroup*.\n";
     CreateDemandGroup();
     this->rides = new Ride*[MAX_GROUPS];
     this->ride_count = 0;
+    std::cout << "  Created vector with the Ride*.\n";
+    std::cout << "All objects successfully instatiated.\n\n";
 
     // Controle de memória
+    std::cout << "Updating memory...\n";
     this->static_mem_usage = 4*sizeof(int) + 4*sizeof(double) + sizeof(float) + this->scaler.GetMemoryUsage() + sizeof(DemandGroup**)+ sizeof(Ride**) + sizeof(DemandGroup*)*MAX_GROUPS + sizeof(Ride*)*MAX_GROUPS;
     this->extra_mem_usage = 0;
+    std::cout << "Memory updated. This manager was successfully created.\n\n";
 }
 
 // DESTRUTOR: libera memória alocada para os grupos de demandas e corridas
@@ -120,7 +138,7 @@ Manager::~Manager() {
 //-------------------------------------------------------------------------------
 
 // MakeDemand (pré-simulação): Cria uma nova demanda com os parâmetros passados e a insere no grupo de demandas seguindo as restrições de compartilhamento. Retorna o grupo em que a demanda foi inserida ou -1 se não foi possível inserir em nenhum grupo.
-int Manager::MakeDemand(int id, int t, double ox, double oy, double dx, double dy) {
+int Manager::MakeDemand(int id, int t, double ox, double oy, double dx, double dy, std::ostream debug) {
     // Criação da demanda e recuperação da primeira demanda no grupo mais recente ainda não fechado
     Demand* new_demand = new Demand(id, t, ox, oy, dx, dy);                 // nova demanda
     DemandGroup* current_group = demand_groups[this->group_count - 1];      // grupo mais recente
@@ -188,15 +206,16 @@ void Manager::StartSimulation(std::ofstream& out) {
 
             // Processamento do evento
             switch(ev.GetType()) {
-                case EventType::RIDESTART:
+                case EventType::RIDESTART: {
                     // Recuperação da corrida e início
                     int index_ride = ev.GetID();
                     Ride* ride = this->rides[index_ride];
                     ride->Start();
 
                     break;
+                }
 
-                case EventType::RIDEEND:
+                case EventType::RIDEEND: {
                     // Recuperação da corrida associada ao evento
                     int index_ride = ev.GetID();
                     Ride* ride = this->rides[index_ride];
@@ -212,6 +231,7 @@ void Manager::StartSimulation(std::ofstream& out) {
                     out << std::endl;
 
                     break;
+                }
             }
         }
         catch(const std::runtime_error& e) {

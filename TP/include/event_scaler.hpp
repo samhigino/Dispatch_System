@@ -8,6 +8,7 @@ class EventScaler {
     private:
         // Atributos
         Event minheap[511];
+        Event nextevent;
         int size;
 
         // Funções auxiliares
@@ -26,7 +27,7 @@ class EventScaler {
 
         // Operações/Métodos
         void ScheduleEvent(int id, double time, EventType type);
-        Event GetNextEvent();
+        Event& GetNextEvent();
 
         // Controle de memória
         int GetMemoryUsage();

@@ -1,6 +1,8 @@
 #include "simulation_manager.hpp"
 
 int main() {
+    // Booting
+    std::cout << "Program started.\n";
     std::ifstream in("tests/input_1.txt", std::fstream::in);
     std::ofstream out("output/output.txt", std::fstream::out);
     std::ofstream debug("output/debug.txt", std::fstream::out);
@@ -20,7 +22,7 @@ int main() {
 
     // Coleta dos parâmetros de simulação
     int eta;            // Capacidade dos veículos
-    double gamma;       // VVelocidade dos veículos
+    double gamma;       // Velocidade dos veículos
     double delta;       // Intervalo máximo de tempo entre origens de corridas compartilhadas
     double alpha;       // Distância máxima entre origem de corridas compartilhadas
     double beta;        // Distância máxima entre destino de corridas compartilhadas

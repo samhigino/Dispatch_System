@@ -116,3 +116,11 @@ void Ride::PrintStops(std::ofstream& out) {
         out << " " << stops[i]->GetPoint().GetX() << " " << stops[i]->GetPoint().GetY();
     }
 }
+
+//-------------------------------------------------------------------------------
+// CONTROLE DE MEMÓRIA
+//-------------------------------------------------------------------------------
+
+int Ride::GetMemoryUsage() {
+    return this->mem_usage;
+}

@@ -85,7 +85,7 @@ void EventScaler::ScheduleEvent(int id, double time, EventType type) {
 }
 
 // GetNextEvent: recupera o próximo evento na fila de prioridade
-Event EventScaler::GetNextEvent() {
+Event& EventScaler::GetNextEvent() {
     // Caso de min-heap vazio
     if(this->size == 0) {
         throw std::runtime_error("Can't recover event: min-heap empty.");
@@ -97,9 +97,17 @@ Event EventScaler::GetNextEvent() {
     }
 
     // Armazena o evento que irá ser retornado, heapify antes de retornar
-    Event root = minheap[0];
+    this->nextevent = minheap[0];
     minheap[0] = minheap[this->size-1];
     this->size--;
     HeapifyDown(0);
-    return root;
+    return nextevent;
+}
+
+//-------------------------------------------------------------------------------
+// CONTROLE DE MEMÓRIA
+//-------------------------------------------------------------------------------
+
+int EventScaler::GetMemoryUsage() {
+    return this->mem_usage;
 }
