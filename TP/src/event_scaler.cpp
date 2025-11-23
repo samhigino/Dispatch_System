@@ -1,4 +1,6 @@
 #include <stdexcept>
+#include <cmath>
+#include <fstream>
 #include "event_scaler.hpp"
 
 //-------------------------------------------------------------------------------
@@ -22,32 +24,35 @@ int EventScaler::GetRightSuccessor(int i) {
 
 // HeapifyDown: restaura a propriedade de min-heap a partir de um nó i para baixo
 void EventScaler::HeapifyDown(int i) {
-    int small = i;          // Assume-se inicialmente que o Evento de menor tempo é i
-    int right = GetRightSuccessor(i);
-    int left = GetLeftSuccessor(i);
+    int earliest = i;                   // Assume-se inicialmente que o Evento de menor tempo é i
+    int right = GetRightSuccessor(i);   // Filho da direita
+    int left = GetLeftSuccessor(i);     // Filho da esquerda
 
-    if(left < this->size && minheap[left].GetTime() < minheap[small].GetTime())
-        small = left;
-
-    if(right < this->size && minheap[right].GetTime() < minheap[small].GetTime())
-        small = right;
-
-    // Caso um dos filhos seja menor, troca com i e chama recursivamente para o filho
-    if(small != i) {
+    // Caso o filho da esquerda seja menor que o nó atual, troca e chama recursivamente para o filho da esquerda
+    if(left < this->size && minheap[left].GetTime() < minheap[earliest].GetTime()) {
         Event aux(minheap[i]);
-        minheap[i] = minheap[small];
-        minheap[small] = aux;
-        HeapifyDown(small);
+        minheap[i] = minheap[left];
+        minheap[left] = aux;
+        HeapifyDown(left);
     }
-    else return;
+
+    // Caso o filho da direita seja menor que o nó atual, troca e chama recursivamente para o filho da direita
+    if(right < this->size && minheap[right].GetTime() < minheap[earliest].GetTime()) {
+        Event aux(minheap[i]);
+        minheap[i] = minheap[right];
+        minheap[right] = aux;
+        HeapifyDown(right);
+    }
+
+    return;
 }
 
 // HeapifyUp: restaura a propriedade de min-heap a partir de um nó i para cima
 void EventScaler::HeapifyUp(int i) {
     int anc = GetAncestral(i);
 
-    // Caso o nó seja maior que seu ancestral, troca e chama recursivamente para o ancestral
-    if(minheap[i].GetTime() > minheap[anc].GetTime()) {
+    // Caso o nó seja menor que seu ancestral, troca e chama recursivamente para o ancestral
+    if(minheap[i].GetTime() < minheap[anc].GetTime()) {
         Event aux(minheap[i]);
         minheap[i] = minheap[anc];
         minheap[anc] = aux;
@@ -102,6 +107,30 @@ Event& EventScaler::GetNextEvent() {
     this->size--;
     HeapifyDown(0);
     return nextevent;
+}
+
+// GetSize: retorna o tamanho atual do min-heap (a quantidade de eventos agendados)
+int EventScaler::GetSize() {
+    return this->size;
+}
+
+// Print: função auxiliar para visualizar o min-heap (debug)
+void EventScaler::Print(std::ostream& debug) {
+    int levels = ceil(log2(this->size + 1));
+    debug << "\nCurrent EventScaler min-heap (size = " << this->size << ") (levels = " << levels << ")\n";
+    for(int i = 0; i < levels; i++) {
+        int level_nodes = pow(2, i);
+        debug << "Level " << i << ": ";
+        for(int j = 0; j < level_nodes; j++) {
+            int index = pow(2, i) - 1 + j;
+            if(index < this->size) {
+                Event& ev = minheap[index];
+                debug << ev.GetTime() << " ";
+            }
+        }
+        debug << "\n\n";
+    }
+    debug.flush();
 }
 
 //-------------------------------------------------------------------------------

@@ -3,7 +3,6 @@
 
 #include <stdexcept>
 #include <iomanip>
-#include <iostream>
 #include <fstream>
 #include "segment.hpp"
 #include "demand_group.hpp"
@@ -26,13 +25,14 @@ class Ride {
         double efficiency;
         int start;
         double duration;
+        double end;
 
         // Controle de memória
         int mem_usage;
 
     public:
         // Construtor e Destrutor
-        Ride(DemandGroup* group, double min_efficiency);
+        Ride(DemandGroup& group, double min_efficiency, std::ostream& debug);
         ~Ride();
 
         // Operações/Métodos
@@ -43,6 +43,7 @@ class Ride {
         double GetDistance();
         int GetStart();
         double GetDuration();
+        double GetEnd();
         int GetStopAmount();
         void PrintStops(std::ofstream& out);
 

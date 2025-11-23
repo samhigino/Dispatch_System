@@ -46,15 +46,15 @@ Segment::Segment(Stop& begs, Stop& ends) {
 }
 
 // DESTRUTOR: destrói as paradas associadas
-Segment::~Segment() {
-    try {
-        delete this->beg;
-        delete this->end;
-    }
-    catch(...) {
-        return;
-    }
-}
+// Segment::~Segment() {;
+//     try {
+//         delete this->beg;
+//         delete this->end;
+//     }
+//     catch(...) {
+//         return;
+//     }
+// }
 
 //-------------------------------------------------------------------------------
 // OPERAÇÕES/MÉTODOS

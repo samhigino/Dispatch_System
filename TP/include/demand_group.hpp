@@ -1,5 +1,5 @@
-#ifndef VECTOR_H
-#define VECTOR_H
+#ifndef DEMANDGROUP_H
+#define DEMANDGROUP_H
 #include <stdexcept>
 #include "demand.hpp"
 
@@ -23,6 +23,7 @@ class DemandGroup {
         int Remove();                   // Remove o item mais recente
         Demand* Get(int index);         // Retorna ponteiro para o item no índice passado
         int Size();                     // Retorna o tamanho da pilha
+        bool IsFull();                  // Retorna se o grupo está cheio
         void Clear();                   // Limpa a pilha
 
         // Controle de memória: detalhamento em demand_group.cpp

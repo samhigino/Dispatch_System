@@ -25,6 +25,7 @@ class Demand {
         // Construtores
         Demand() : Demand(-1, -1, 0.0, 0.0, 0.0, 0.0) { };                  // Demanda "nula" (por definição)
         Demand(int id, int t, double ox, double oy, double dx, double dy);  // Construtor completo
+        Demand(const Demand& other);                                              // Construtor de cópia
 
         // Getters para acesso aos atributos
         int GetID();                                    // Retorna o id da demanda
@@ -34,6 +35,7 @@ class Demand {
         double OriginDistance(Demand& other);           // Calcula distância entre origens desta demanda e outra demanda
         double DestinationDistance(Demand& other);      // Calcula distância entre destinos desta demanda e outra demanda
         double GetDistance();                           // Calcula a distância entre a origem e o destino desta demanda
+        void operator=(const Demand& other);            // Sobrecarga de atribuição: copia os atributos desta demanda com base em outra
 
         // Controle de memória
         int GetMemoryUsage();           // Retorna a quantidade de memória usada pelo objeto

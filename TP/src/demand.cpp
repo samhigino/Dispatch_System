@@ -11,6 +11,17 @@ Demand::Demand(int id, int time, double ox, double oy, double dx, double dy) {
     this->mem_usage = 3*sizeof(int) + 2*sizeof(Point2D) + sizeof(State);
 }
 
+// CONSTRUTOR DE CÓPIA
+Demand::Demand(const Demand& other) {
+    this->id = other.id;
+    this->time = other.time;
+    this->origin = other.origin;
+    this->destination = other.destination;
+    this->state = other.state;
+
+    this->mem_usage = other.mem_usage; // Memória usada é a mesma
+}
+
 // GETTERS
 int Demand::GetID() {
     return this->id;
@@ -38,8 +49,20 @@ double Demand::DestinationDistance(Demand& other) {
     return this->destination.Distance(other.GetDestination());
 }
 
+// Calcula a distância entre a origem e o destino desta demanda
 double Demand::GetDistance() {
     return this->origin.Distance(this->destination);
+}
+
+// Sobrecarga de atribuição
+void Demand::operator=(const Demand& other) {
+    this->id = other.id;
+    this->time = other.time;
+    this->origin = other.origin;
+    this->destination = other.destination;
+    this->state = other.state;
+    
+    this->mem_usage = other.mem_usage; // Memória usada é a mesma
 }
 
 int Demand::GetMemoryUsage() {

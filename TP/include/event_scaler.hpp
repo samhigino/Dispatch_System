@@ -28,6 +28,8 @@ class EventScaler {
         // Operações/Métodos
         void ScheduleEvent(int id, double time, EventType type);
         Event& GetNextEvent();
+        int GetSize();
+        void Print(std::ostream& debug);
 
         // Controle de memória
         int GetMemoryUsage();
