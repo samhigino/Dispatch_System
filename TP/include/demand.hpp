@@ -2,13 +2,6 @@
 #define DEMAND_H
 #include "2D_point.hpp"
 
-enum class State { 
-    DEMANDED,
-    INDIVIDUAL,
-    SHARED,
-    COMPLETE
-};
-
 class Demand {
     private:
         // Atributos gerais
@@ -16,7 +9,6 @@ class Demand {
         double time;            // Marcador de tempo de solicitação da demanda
         Point2D origin;         // Ponto de origem
         Point2D destination;    // Ponto de destino
-        State state;            // Estado da demanda: solicitada, individual, compartilhada ou completa
 
         // Controle de memória
         int mem_usage;          // Quantidade de memória consumida pelo objeto

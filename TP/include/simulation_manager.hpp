@@ -27,10 +27,10 @@ class Manager {
         int demand_count;                           // Quantidade de demandas já recebidas
 
         // Funções auxiliares (não acessíveis externamente - ver uso em state_manager.cpp)
-        void UpdateMemory();
-        DemandGroup* CreateDemandGroup();
-        void MakeRide(DemandGroup* group);
-        bool CheckEfficiency(DemandGroup& group);
+        void UpdateMemory();                        // O(1)
+        DemandGroup* CreateDemandGroup();           // O(1)
+        bool MakeRide(DemandGroup* group);          // O(n)
+        bool CheckEfficiency(DemandGroup& group);   // O(n)
 
         // Controle de memória e depuração
         int static_mem_usage;           // Memória estática usada pelo objeto (imprescindível)

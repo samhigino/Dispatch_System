@@ -31,7 +31,7 @@ DemandGroup* Manager::CreateDemandGroup() {
 }
 
 // MakeRide: cria uma nova corrida baseada no grupo passado como parâmetro e a insere no vetor de corridas
-void Manager::MakeRide(DemandGroup* group) {
+bool Manager::MakeRide(DemandGroup* group) {
     if(ride_count == MAX_GROUPS) {
         // Número máximo de corridas atingido
         throw std::out_of_range("Can't create a new ride: max number of rides reached.");
@@ -52,9 +52,11 @@ void Manager::MakeRide(DemandGroup* group) {
         // Update de memória
         this->extra_mem_usage += rides[ride_count-1]->GetMemoryUsage();
         UpdateMemory();
+
+        return true;
     }
     catch(const low_efficiency& e) {
-        return;
+        return false;
     }
 }
 

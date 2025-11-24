@@ -6,9 +6,8 @@ Demand::Demand(int id, double time, double ox, double oy, double dx, double dy) 
     this->time = time;
     this->origin = Point2D(ox, oy);
     this->destination = Point2D(dx, dy);
-    this->state = State::DEMANDED;
 
-    this->mem_usage = 3*sizeof(int) + 2*sizeof(Point2D) + sizeof(State);
+    this->mem_usage = 3*sizeof(int) + 2*sizeof(Point2D);
 }
 
 // CONSTRUTOR DE CÓPIA
@@ -17,7 +16,6 @@ Demand::Demand(const Demand& other) {
     this->time = other.time;
     this->origin = other.origin;
     this->destination = other.destination;
-    this->state = other.state;
 
     this->mem_usage = other.mem_usage; // Memória usada é a mesma
 }
@@ -60,7 +58,6 @@ void Demand::operator=(const Demand& other) {
     this->time = other.time;
     this->origin = other.origin;
     this->destination = other.destination;
-    this->state = other.state;
     
     this->mem_usage = other.mem_usage; // Memória usada é a mesma
 }
