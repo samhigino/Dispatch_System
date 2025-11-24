@@ -64,7 +64,6 @@ void DemandGroup::Clear() {
     this->item_counter = 0;
 }
 
-// CONTROLE DE MEMÓRIA
 // GetMemUsage: retorna quanto de memória este objeto consome, incluindo as demandas alocadas dinamicamente
 int DemandGroup::GetMemoryUsage() {
     return this->mem_usage;

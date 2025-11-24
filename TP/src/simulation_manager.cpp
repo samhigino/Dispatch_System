@@ -358,11 +358,6 @@ void Manager::StartSimulation(std::ostream& out, std::ostream& debug) {
     }
 }
 
-// GetStatistics (pós-simulação): calcula e imprime as estatísticas da simulação.
-void Manager::GetStatistics(std::ostream& out) {
-    out << std::fixed << std::setprecision(2);
-}
-
 //-------------------------------------------------------------------------------
 // CONTROLE DE MEMÓRIA
 //-------------------------------------------------------------------------------

@@ -43,14 +43,13 @@ class Manager {
         ~Manager();
 
         // Simulação (pré, durante e pós)
-        int MakeDemand(int id, double t, double ox, double oy, double dx, double dy, std::ostream& debug);
-        void StartSimulation(std::ostream& out, std::ostream& debug);
-        void GetStatistics(std::ostream& out);
+        int MakeDemand(int id, double t, double ox, double oy, double dx, double dy, std::ostream& debug);  // Registra uma nova demanda e processa ela
+        void StartSimulation(std::ostream& out, std::ostream& debug);                                       // Inicia a simulação e imprime as estatísticas de cada corrida
 
         // Controle de memória
-        int GetStaticMemUsage();
-        int GetExtraMemUsage();
-        int GetMemoryUsage();
+        int GetStaticMemUsage();    // Retorna a memória imprescindível usada pelo manager
+        int GetExtraMemUsage();     // Retorna a memória extra usada pelo manager
+        int GetMemoryUsage();       // Retorna o máximo de uso de memória já usado pelo manager
 };
 
 #endif

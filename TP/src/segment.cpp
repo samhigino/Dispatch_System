@@ -22,6 +22,7 @@ Segment::Segment(Stop& begs, Stop& ends) {
     this->complete = false;
     this->total_distance = beg->Distance(*end);
     
+    // Detecta automaticamente o tipo de segmento com base no tipo das paradas
     switch(beg->GetType()) {
         case StopType::PICKUP:
             if(end->GetType() == StopType::PICKUP) {
@@ -37,24 +38,14 @@ Segment::Segment(Stop& begs, Stop& ends) {
                 this->type = SegmentType::DROPOFF;
             }
             else {
-                throw "Invalid stops when creating segment.";   // Caso as paradas passadas sejam (entrega, coleta), o que não faz sentido
+                // Caso as paradas passadas sejam (entrega, coleta), o que não faz sentido
+                throw std::logic_error("Invalid stops when creating segment.");
             }
             break;
     }
 
     this->static_mem_usage = sizeof(SegmentType) + begs.GetMemoryUsage() + ends.GetMemoryUsage() + sizeof(double) + sizeof(bool) + sizeof(int);
 }
-
-// DESTRUTOR: destrói as paradas associadas
-// Segment::~Segment() {;
-//     try {
-//         delete this->beg;
-//         delete this->end;
-//     }
-//     catch(...) {
-//         return;
-//     }
-// }
 
 //-------------------------------------------------------------------------------
 // OPERAÇÕES/MÉTODOS

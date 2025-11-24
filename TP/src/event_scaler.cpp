@@ -80,6 +80,7 @@ EventScaler::EventScaler() {
 // ScheduleEvent: agenda um evento - insere-o no min-heap e organiza o min-heap
 void EventScaler::ScheduleEvent(int id, double time, EventType type) {
     if(this->size == MAX_HEAP_SIZE) {
+        // Min-heap cheio
         throw std::runtime_error("Can't schedule event: max size reached.");
     }
     else {
@@ -95,6 +96,7 @@ Event& EventScaler::GetNextEvent() {
     if(this->size == 0) {
         throw std::runtime_error("Can't recover event: min-heap empty.");
     }
+    
     // Caso trivial: somente 1 evento
     if(this->size == 1) {
         this->size--;

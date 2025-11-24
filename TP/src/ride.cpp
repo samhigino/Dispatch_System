@@ -145,6 +145,17 @@ void Ride::CalculateDuration(double veh_speed) {
     this->end = this->start + this->duration;
 }
 
+// Imprime as coordenadas de cada parada, em ordem, na saída passada
+void Ride::PrintStops(std::ostream& out) {
+    for(int i = 0; i < stop_amount; i++) {
+        out << " " << stops[i]->GetPoint().GetX() << " " << stops[i]->GetPoint().GetY();
+    }
+}
+
+//-------------------------------------------------------------------------------
+// GETTERS
+//-------------------------------------------------------------------------------
+
 double Ride::GetEfficiency() {
     return this->efficiency;
 }
@@ -167,13 +178,6 @@ double Ride::GetEnd() {
 
 int Ride::GetStopAmount() {
     return this->stop_amount;
-}
-
-// Imprime as coordenadas de cada parada, em ordem, na saída passada
-void Ride::PrintStops(std::ostream& out) {
-    for(int i = 0; i < stop_amount; i++) {
-        out << " " << stops[i]->GetPoint().GetX() << " " << stops[i]->GetPoint().GetY();
-    }
 }
 
 //-------------------------------------------------------------------------------

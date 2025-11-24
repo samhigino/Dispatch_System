@@ -22,14 +22,14 @@ class EventScaler {
         int mem_usage;
 
     public:
-        // Construtor e Destrutor
-        EventScaler();
+        // Construtor
+        EventScaler();  // Inicia o min-heap e os atributos de acordo
 
         // Operações/Métodos
-        void ScheduleEvent(int id, double time, EventType type);
-        Event& GetNextEvent();
-        int GetSize();
-        void Print(std::ostream& debug);
+        void ScheduleEvent(int id, double time, EventType type);    // Agenda um evento e insere-o no min-heap
+        Event& GetNextEvent();                                      // Recupera o evento de menor tempo e o retira do min-heap
+        int GetSize();                                              // Retorna o tamanho do min-heap
+        void Print(std::ostream& debug);                            // Imprime o min-heap por nível
 
         // Controle de memória
         int GetMemoryUsage();

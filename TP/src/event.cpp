@@ -22,12 +22,14 @@ EventType Event::GetType() {
     return this->type;
 }
 
+// Sobrecarga de atribuição para cópia
 void Event::operator=(const Event& other) {
     this->id = other.id;
     this->time = other.time;
     this->type = other.type;
 }
 
+// Retorna a memória usada pelo objeto
 int Event::GetMemoryUsage() {
     return this->mem_usage;
 }

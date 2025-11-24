@@ -4,6 +4,7 @@
 #include <stdexcept>
 #include <string>
 
+// Exceção para caso de baixa eficiência na criação de uma corrida
 class low_efficiency : std::runtime_error {
     public:
         low_efficiency(const std::string& message) throw() : std::runtime_error(message) { };

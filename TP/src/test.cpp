@@ -51,7 +51,7 @@ int main() {
     for(int i = 0; i < demand_amount; i++) {
         debug << "\n\t-> Demand " << i << endl;
         int id;
-        int time;
+        double time;
         double ox, oy, dx, dy;
         in >> id >> time >> ox >> oy >> dx >> dy;
 

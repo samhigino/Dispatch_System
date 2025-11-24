@@ -24,13 +24,13 @@ class Segment {
         int static_mem_usage;           // Quantidade de memória consumida pelo objeto
 
     public:
-        // Construtores e Destrutor
+        // Construtores
+        // Não há destrutor, é responsabilidade de ride.cpp apagar as paradas
         Segment();                      // Construtor padrão pra um segmento "nulo" (por definição)
-        Segment(Stop& beg, Stop& end);  // Construtor da classe: inicializa os ponteiros referenciando as paradas passadas como parâmetro e formaliza o tipo de segmento com base nas paradas
-        // ~Segment();                     // Destrutor: apaga as paradas associadas
+        Segment(Stop& beg, Stop& end);  // Construtor da classe
 
         // Operações/Métodos
-        void operator=(Segment& other);         // Sobrecarga de atribuição: copia as paradas e atualiza os outros atributos
+        void operator=(Segment& other);         // Sobrecarga de atribuição para cópias
         void MarkComplete();                    // Marca o segmento como completo
         double GetDistance();                   // Retorna o comprimento do segmento
         SegmentType GetType();                  // Retorna o tipo do segmento

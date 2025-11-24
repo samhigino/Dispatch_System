@@ -23,9 +23,9 @@ class Event {
         Event(Event& other);                                // Construtor de cópia
 
         // Métodos
-        int GetID();
-        double GetTime();
-        EventType GetType();
+        int GetID();                            // Retorna id
+        double GetTime();                       // Retorna tempo
+        EventType GetType();                    // Retorna tipo
         void operator=(const Event& other);     // Sobrecarga de atribuição para cópias
 
         // Controle de memória
