@@ -116,25 +116,6 @@ int EventScaler::GetSize() {
     return this->size;
 }
 
-// Print: função auxiliar para visualizar o min-heap (debug)
-void EventScaler::Print(std::ostream& debug) {
-    int levels = ceil(log2(this->size + 1));
-    debug << "\nCurrent EventScaler min-heap (size = " << this->size << ") (levels = " << levels << ")\n";
-    for(int i = 0; i < levels; i++) {
-        int level_nodes = pow(2, i);
-        debug << "Level " << i << ": ";
-        for(int j = 0; j < level_nodes; j++) {
-            int index = pow(2, i) - 1 + j;
-            if(index < this->size) {
-                Event& ev = minheap[index];
-                debug << ev.GetTime() << " ";
-            }
-        }
-        debug << "\n\n";
-    }
-    debug.flush();
-}
-
 //-------------------------------------------------------------------------------
 // CONTROLE DE MEMÓRIA
 //-------------------------------------------------------------------------------

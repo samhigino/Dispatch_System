@@ -32,8 +32,8 @@ class Ride {
 
     public:
         // Construtor e Destrutor
-        Ride(DemandGroup& group, double min_efficiency, std::ostream& debug);   // Construtor: inicializa as paradas, segmentos e outros atributos com base em um grupo de demandas. Lança low_efficiency caso a eficiência não seja atingida
-        ~Ride();                                                                // Destrutor: apaga o conteúdo dos vetores
+        Ride(DemandGroup& group, double min_efficiency);    // Construtor: inicializa as paradas, segmentos e outros atributos com base em um grupo de demandas. Lança low_efficiency caso a eficiência não seja atingida
+        ~Ride();                                            // Destrutor: apaga o conteúdo dos vetores
 
         // Operações/Métodos
         void Start();                                   // Assinala início desta corrida

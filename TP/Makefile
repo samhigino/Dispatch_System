@@ -16,9 +16,7 @@ SRC_DIR = src
 # OBJETOS
 # --------------------------------------------------------------
 TARGET = tp2.out
-TEST_TARGET = teste.out
 MAIN_OBJ = obj/main.o obj/2D_point.o obj/demand.o obj/stop.o obj/segment.o obj/demand_group.o obj/ride.o obj/event.o obj/event_scaler.o obj/simulation_manager.o
-TEST_OBJ = obj/test.o obj/2D_point.o obj/demand.o obj/stop.o obj/segment.o obj/demand_group.o obj/ride.o obj/event.o obj/event_scaler.o obj/simulation_manager.o
 
 # --------------------------------------------------------------
 # COMPILAÇÃO
@@ -60,23 +58,9 @@ obj/simulation_manager.o: $(SRC_DIR)/simulation_manager.cpp
 obj/main.o: $(SRC_DIR)/main.cpp
 	$(CXX) $(CXXFLAGS) -c $(SRC_DIR)/main.cpp -o $(OBJ_DIR)/main.o
 
-test: dirs $(TEST_OBJ) 
-	$(CXX) $(CXXFLAGS) $(TEST_OBJ) -o $(BIN_DIR)/$(TEST_TARGET)
-	@rm -f outputs/*.txt
-	$(BIN_DIR)/$(TEST_TARGET)
-
-obj/test.o: $(SRC_DIR)/test.cpp
-	$(CXX) $(CXXFLAGS) -c $(SRC_DIR)/test.cpp -o $(OBJ_DIR)/test.o
-
 ex:
-	@rm -f outputs/*.txt	
 	$(BIN_DIR)/$(TARGET)
 
-runtest:
-	@rm -f outputs/*.txt
-	$(BIN_DIR)/$(TEST_TARGET)
-
 clean: 
-	@rm -f output/*.txt
 	@rm -f $(BIN_DIR)/*.out
 	@rm -f $(OBJ_DIR)/*.o

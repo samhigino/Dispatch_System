@@ -28,9 +28,9 @@ class Manager {
 
         // Funções auxiliares (não acessíveis externamente - ver uso em state_manager.cpp)
         void UpdateMemory();
-        DemandGroup* CreateDemandGroup(std::ostream& debug);
-        void MakeRide(DemandGroup* group, std::ostream& debug);
-        bool CheckEfficiency(DemandGroup& group, std::ostream& debug);
+        DemandGroup* CreateDemandGroup();
+        void MakeRide(DemandGroup* group);
+        bool CheckEfficiency(DemandGroup& group);
 
         // Controle de memória e depuração
         int static_mem_usage;           // Memória estática usada pelo objeto (imprescindível)
@@ -43,8 +43,8 @@ class Manager {
         ~Manager();
 
         // Simulação (pré, durante e pós)
-        int MakeDemand(int id, double t, double ox, double oy, double dx, double dy, std::ostream& debug);  // Registra uma nova demanda e processa ela
-        void StartSimulation(std::ostream& out, std::ostream& debug);                                       // Inicia a simulação e imprime as estatísticas de cada corrida
+        int MakeDemand(int id, double t, double ox, double oy, double dx, double dy);  // Registra uma nova demanda e processa ela
+        void StartSimulation(std::ostream& out);                                       // Inicia a simulação e imprime as estatísticas de cada corrida
 
         // Controle de memória
         int GetStaticMemUsage();    // Retorna a memória imprescindível usada pelo manager

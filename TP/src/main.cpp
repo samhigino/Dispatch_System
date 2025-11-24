@@ -2,15 +2,7 @@
 
 int main() {
     // Booting
-    std::ofstream debug("output/debug.txt", std::fstream::out);
-
-    if(!debug.is_open()) {
-        std::cout << "Debug file did not open." << std::endl;
-        return 1;
-    }
-
     std::cout << std::fixed << std::setprecision(2);
-    debug << std::fixed << std::setprecision(2);
 
     // Coleta dos parâmetros de simulação
     int eta;            // Capacidade dos veículos
@@ -33,11 +25,11 @@ int main() {
         double ox, oy, dx, dy;
         std::cin >> id >> time >> ox >> oy >> dx >> dy;
 
-        manager.MakeDemand(id, time, ox, oy, dx, dy, debug);
+        manager.MakeDemand(id, time, ox, oy, dx, dy);
     }
 
     // Simulação
-    manager.StartSimulation(std::cout, debug);
+    manager.StartSimulation(std::cout);
 
     return 0;
 }

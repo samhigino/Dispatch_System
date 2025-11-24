@@ -1,6 +1,10 @@
-# Ignorar objetos/outputs
-output/
-tests/
-obj/
-bin/
+# Ignorar objetos/outputs do projeto principal
+TP/obj/
+TP/bin/
+TP/TP.zip
 
+# Ignorar o TP de testes
+TP-testes/
+
+# Ignorar o próprio gitignore
+.gitignore
