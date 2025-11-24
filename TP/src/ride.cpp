@@ -153,7 +153,7 @@ double Ride::GetDistance() {
     return this->distance;
 }
 
-int Ride::GetStart() {
+double Ride::GetStart() {
     return this->start;
 }
 
@@ -170,7 +170,7 @@ int Ride::GetStopAmount() {
 }
 
 // Imprime as coordenadas de cada parada, em ordem, na saída passada
-void Ride::PrintStops(std::ofstream& out) {
+void Ride::PrintStops(std::ostream& out) {
     for(int i = 0; i < stop_amount; i++) {
         out << " " << stops[i]->GetPoint().GetX() << " " << stops[i]->GetPoint().GetY();
     }

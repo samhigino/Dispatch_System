@@ -4,7 +4,7 @@
 #include "demand_group.hpp"
 #include "event_scaler.hpp"
 
-const static int MAX_GROUPS = 100;
+const static int MAX_GROUPS = 200;
 
 class Manager {
     private:
@@ -43,9 +43,9 @@ class Manager {
         ~Manager();
 
         // Simulação (pré, durante e pós)
-        int MakeDemand(int id, int t, double ox, double oy, double dx, double dy, std::ostream& debug);
-        void StartSimulation(std::ofstream& out, std::ofstream& debug);
-        void GetStatistics(std::ofstream& out);
+        int MakeDemand(int id, double t, double ox, double oy, double dx, double dy, std::ostream& debug);
+        void StartSimulation(std::ostream& out, std::ostream& debug);
+        void GetStatistics(std::ostream& out);
 
         // Controle de memória
         int GetStaticMemUsage();

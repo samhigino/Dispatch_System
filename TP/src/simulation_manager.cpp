@@ -112,8 +112,6 @@ bool Manager::CheckEfficiency(DemandGroup& group, std::ostream& debug) {
 // CONSTRUTOR: incializa todas os parâmetros de simulação com os parâmetros, tempo global como 0, memória estática e extra como apropriado
 Manager::Manager(int eta, double gamma, double delta, double alpha, double beta, float lambda, int demands) {
     // Parametrização da simulação
-    std::cout << "Called trying to instantiate manager.\n";
-    std::cout << "Setting basic simulation parameters...\n";
     this->veh_capacity = eta;
     this->veh_speed = gamma;
     this->delta = delta;
@@ -121,30 +119,23 @@ Manager::Manager(int eta, double gamma, double delta, double alpha, double beta,
     this->destin_max_distance = beta;
     this->min_efficiency = lambda;
     this->demand_amount = demands;
-    std::cout << "Simulation parameters set.\n\n";
 
     // Objetos de simulação e variáveis de controle
-    std::cout << "Instantiating simulation objects...\n";
     this->global_time = 0;
     this->demand_groups = new DemandGroup*[MAX_GROUPS];
     this->group_count = 0;
-    std::cout << "  Created vector with the DemandGroup*.\n";
     this->rides = new Ride*[MAX_GROUPS];
     this->ride_count = 0;
-    std::cout << "  Created vector with the Ride*.\n";
     for(int i = 0; i < MAX_GROUPS; i++) {
         this->demand_groups[i] = nullptr;
         this->rides[i] = nullptr;
     }
     CreateDemandGroup(std::cout);
     this->demand_count = 0;
-    std::cout << "All objects successfully instatiated.\n\n";
 
     // Controle de memória
-    std::cout << "Updating memory...\n";
     this->static_mem_usage = 4*sizeof(int) + 4*sizeof(double) + sizeof(float) + this->scaler.GetMemoryUsage() + sizeof(DemandGroup**)+ sizeof(Ride**) + sizeof(DemandGroup*)*MAX_GROUPS + sizeof(Ride*)*MAX_GROUPS;
     this->extra_mem_usage = 0;
-    std::cout << "Memory updated. This manager was successfully created.\n\n";
 }
 
 // DESTRUTOR: libera memória alocada para os grupos de demandas e corridas
@@ -162,7 +153,7 @@ Manager::~Manager() {
 //-------------------------------------------------------------------------------
 
 // MakeDemand (pré-simulação): Cria uma nova demanda com os parâmetros passados e a insere no grupo de demandas seguindo as restrições de compartilhamento. Retorna o grupo em que a demanda foi inserida ou -1 se não foi possível inserir em nenhum grupo.
-int Manager::MakeDemand(int id, int t, double ox, double oy, double dx, double dy, std::ostream& debug) {
+int Manager::MakeDemand(int id, double t, double ox, double oy, double dx, double dy, std::ostream& debug) {
     this->demand_count++;
     debug << "\t\tCreating demand with id: " << id << "; time: " << t << "; ox: " << ox << "; oy: " << oy << "; dx: " << dx << "; dy: " << dy << std::endl;
 
@@ -274,7 +265,7 @@ int Manager::MakeDemand(int id, int t, double ox, double oy, double dx, double d
 }
 
 // StartSimulation (durante simulação): começa a executar a simulação, recupera todos os eventos agendados e conclui as corridas. Imprime as informações de cada corrida à medida que são concluídas
-void Manager::StartSimulation(std::ofstream& out, std::ofstream& debug) {
+void Manager::StartSimulation(std::ostream& out, std::ostream& debug) {
     debug << "Starting simulation now...\n";
     if(this->ride_count == this->group_count) {
         debug << "\tNumber of groups: " << this->group_count << std::endl;
@@ -368,7 +359,7 @@ void Manager::StartSimulation(std::ofstream& out, std::ofstream& debug) {
 }
 
 // GetStatistics (pós-simulação): calcula e imprime as estatísticas da simulação.
-void Manager::GetStatistics(std::ofstream& out) {
+void Manager::GetStatistics(std::ostream& out) {
     out << std::fixed << std::setprecision(2);
 }
 

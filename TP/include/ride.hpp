@@ -23,7 +23,7 @@ class Ride {
         bool done;
         double distance;
         double efficiency;
-        int start;
+        double start;
         double duration;
         double end;
 
@@ -41,11 +41,11 @@ class Ride {
         void CalculateDuration(double veh_speed);
         double GetEfficiency();
         double GetDistance();
-        int GetStart();
+        double GetStart();
         double GetDuration();
         double GetEnd();
         int GetStopAmount();
-        void PrintStops(std::ofstream& out);
+        void PrintStops(std::ostream& out);
 
         // Controle de Memória
         int GetMemoryUsage();

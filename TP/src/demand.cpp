@@ -1,7 +1,7 @@
 #include "demand.hpp"
 
 // CONSTRUTOR COMPLETO
-Demand::Demand(int id, int time, double ox, double oy, double dx, double dy) {
+Demand::Demand(int id, double time, double ox, double oy, double dx, double dy) {
     this->id = id;
     this->time = time;
     this->origin = Point2D(ox, oy);
@@ -27,7 +27,7 @@ int Demand::GetID() {
     return this->id;
 }
 
-int Demand::GetTime() {
+double Demand::GetTime() {
     return this->time;
 }
 
